@@ -5,7 +5,7 @@ test.beforeEach(async ({page}) => {
     await page.goto('https://conduit.bondaracademy.com/')
 })
 
-test.skip('has a title', async ({page}) => {
+test.only('has a title', async ({page}) => {
     /// mocking data
     await page.route('*//**/api/tags', async route => { 
     await route.fulfill({
@@ -31,11 +31,11 @@ test.skip('has a title', async ({page}) => {
     await page.waitForTimeout(2000)
 }) 
 
-test.skip('delete article', async ({page, request}) => {
+test('delete article', async ({page, request}) => {
     const articleReponse = await request.post('https://conduit-api.bondaracademy.com/api/articles/', {
         data: {
             "article": {
-            "title": "Test API article",
+            "title": "Test API article test",
             "description": "Test API subject",
             "body": "Test description",
             "tagList": []
@@ -46,11 +46,11 @@ test.skip('delete article', async ({page, request}) => {
     expect(articleReponse.status()).toEqual(201)
 
     await page.getByText('Global Feed').click()
-    await page.getByText("Test API article").click()
+    await page.getByText("Test API article test").click()
     await page.getByRole('button', {name: "Delete Article"}).first().click()
     await page.getByText('Global Feed').click()
 
-    await expect(page.locator('app-article-list h1').first()).not.toContainText("Test API article")
+    await expect(page.locator('app-article-list h1').first()).not.toContainText("Test API article test")
 })
 
 test('create article', async({page, request}) =>{

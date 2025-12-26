@@ -4,8 +4,8 @@ setup('create new article', async ({request}) => {
     const articleReponse = await request.post('https://conduit-api.bondaracademy.com/api/articles/', {
         data: {
             "article": {
-            "title": "Test API article",
-            "description": "Test API subject",
+            "title": "Test new API article",
+            "description": "Test new API subject",
             "body": "Test description",
             "tagList": []
             }
